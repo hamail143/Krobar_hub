@@ -162,18 +162,24 @@ class ProductViewScreen extends StatelessWidget {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.blue,
+                      backgroundColor:
+                          Color(0xFF1F68A5), // Set the background color
                       padding:
                           EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      textStyle: TextStyle(
+                          color: Colors.white), // Set the text color to white
                     ),
                     child: Text('Go to cart'),
                   ),
                   ElevatedButton(
                     onPressed: () => _addToCart(context),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.green,
+                      backgroundColor: Color(
+                          0xFF28A745), // Complementary background color (green)
                       padding:
                           EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                      textStyle: TextStyle(
+                          color: Colors.white), // Set the text color to white
                     ),
                     child: Text('Buy Now'),
                   ),

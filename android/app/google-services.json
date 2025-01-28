@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "401996080344",
+    "project_id": "real-estate-new-7ff3e",
+    "storage_bucket": "real-estate-new-7ff3e.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401996080344:android:2a00758a904e9fc90de3ad",
+        "android_client_info": {
+          "package_name": "com.example.krobar_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401996080344-o6ahm5kgpngero5gc9b31kttghjtdpv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlr6B4TYPlLngF_Vg_J8-bgo6W6EzsW2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401996080344-o6ahm5kgpngero5gc9b31kttghjtdpv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401996080344:android:b78a7efe2bd0b8940de3ad",
+        "android_client_info": {
+          "package_name": "com.example.realestatenew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401996080344-o6ahm5kgpngero5gc9b31kttghjtdpv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlr6B4TYPlLngF_Vg_J8-bgo6W6EzsW2A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401996080344-o6ahm5kgpngero5gc9b31kttghjtdpv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -11,10 +11,15 @@ import 'package:krobar_hub/Screens/checkout.dart';
 import 'package:krobar_hub/Screens/forgotpass.dart';
 import 'package:krobar_hub/Screens/tempscreens.dart';
 import 'package:krobar_hub/Screens/CartScreen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// Import the new checkout screen
-
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -33,7 +38,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) =>
-            SplashscreenWidget(), // Splash screen as the starting screen
+            AuthWrapper(), // Use AuthWrapper for the initial route
         '/onboarding': (context) => OnboardingScreen(),
         '/login': (context) => LoginScreen(),
         '/create_account': (context) => CreateAccountScreen(),
@@ -63,6 +68,25 @@ class MyApp extends StatelessWidget {
                   ProductViewScreen(product: product, cartItems: cartItems));
         }
         return null;
+      },
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.active) {
+          User? user = snapshot.data;
+          if (user == null) {
+            return LoginScreen();
+          }
+          return BottomNavBar();
+        }
+        return CircularProgressIndicator(); // Show a loading indicator while checking auth state
       },
     );
   }

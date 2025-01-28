@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -14,6 +16,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final Color primaryColor = Color(0xFF2067A5); // #2067A5
   final Color blackColor = Color(0xFF000000); // #000000 (black)
   final Color whiteColor = Color(0xFFFFFFFF); // #FFFFFF (white)
+
+  void _showToast(String message) {
+    Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 1,
+      backgroundColor: Colors.red,
+      textColor: Colors.white,
+      fontSize: 16.0,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,12 +103,28 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (_formKey.currentState!.validate()) {
-                        print('Form is valid');
-                        Navigator.pushReplacementNamed(context, '/home');
-                      } else {
-                        print('Form is invalid');
+                        try {
+                          UserCredential userCredential = await FirebaseAuth
+                              .instance
+                              .signInWithEmailAndPassword(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                          Navigator.pushReplacementNamed(context, '/home');
+                        } on FirebaseAuthException catch (e) {
+                          if (e.code == 'user-not-found') {
+                            _showToast('No user found for that email.');
+                          } else if (e.code == 'wrong-password') {
+                            _showToast(
+                                'Wrong password provided for that user.');
+                          } else if (e.code == 'invalid-email') {
+                            _showToast('Invalid email address.');
+                          } else {
+                            _showToast('An error occurred: ${e.message}');
+                          }
+                        }
                       }
                     },
                     style: ElevatedButton.styleFrom(
